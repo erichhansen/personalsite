@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="docs-assets/ico/favicon.png">
+
+    <title>Erich Hansen</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="offcanvas.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+<div id="popup"></div>
+<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Erich Hansen</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#"><i class="fa fa-home fa-lg"></i></a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="https://twitter.com/impossiblevent"><i class="fa fa-twitter-square fa-lg"></i></a></li>
+                <li><a href="http://www.linkedin.com/pub/erich-hansen/b/938/800"><i class="fa fa-linkedin-square fa-lg"></i> </a></li>
+                <li><a href="https://github.com/erichhansen"><i class="fa fa-github fa-lg"></i></a></li>
+            </ul>
+        </div><!-- /.nav-collapse -->
+    </div><!-- /.container -->
+</div><!-- /.navbar -->
+
+<div class="container">
+
+    <div class="row row-offcanvas row-offcanvas-right">
+
+        <div class="col-xs-12 col-sm-9">
+            <p class="pull-right visible-xs">
+                <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+            </p>
+            <div class="jumbotron">
+                <h1>Welcome!</h1>
+                <p>Welcome to my site, where I will discuss various topics in web development, explore new technologies, and have fun.</p>
+            </div>
+            <div id="posts"></div>
+        </div><!--/span-->
+
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="list-group">
+                <a href="#" class="list-group-item active">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+                <a href="#" class="list-group-item">Link</a>
+            </div>
+        </div><!--/span-->
+    </div><!--/row-->
+    <hr>
+    <footer>
+        <p>&copy; Erich Hansen 2013</p>
+    </footer>
+</div><!--/.container-->
+
+
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="dist/js/bootstrap.min.js"></script>
+<script src="js/offcanvas.js"></script>
+<script src="js/WordPress/Response.js"></script>
+<script src="js/Modal/Modal.js"></script>
+<script src="js/Templates/handlebars.runtime.min.js"></script>
+<script src="templates/post.js"></script>
+<script src="templates/modal.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        var url = 'https://public-api.wordpress.com/rest/v1/sites/erichhansen.wordpress.com/posts/?number=3&pretty=1';
+        $.ajax({
+            url: url,
+            type:'GET',
+            dataType: 'jsonp',
+            crossDomain : true,
+            success: function(data) {
+                var html = '';
+                $(data.posts).each(function(i, elem) {
+                    var foo = Handlebars.templates.post(elem);
+                    html = html + foo;
+                });
+                alert(html);
+                $('#posts').html(html);
+            },
+            error: function() {
+                Modal.show('Error', 'An Error Has Occurred While Loading', 'fa-exclamation-triangle')
+            }
+        });
+    });
+
+    Handlebars.registerHelper('formatDate', function(date) {
+        return date.substr(0, 10);
+    });
+
+</script>
+</body>
+</html>
