@@ -97,6 +97,7 @@
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="dist/js/bootstrap.min.js"></script>
+<script src="js/spin.min.js"></script>
 <script src="js/offcanvas.js"></script>
 <script src="js/WordPress/Response.js"></script>
 <script src="js/Modal/Modal.js"></script>
@@ -104,6 +105,8 @@
 <script src="templates/post.js"></script>
 <script src="templates/modal.js"></script>
 <script type="text/javascript">
+    var target = document.getElementById('posts');
+    var spinner = new Spinner().spin(target);
     $(document).ready(function() {
         var url = 'https://public-api.wordpress.com/rest/v1/sites/erichhansen.wordpress.com/posts/?number=3&pretty=1';
         $.ajax({
@@ -114,10 +117,8 @@
             success: function(data) {
                 var html = '';
                 $(data.posts).each(function(i, elem) {
-                    var foo = Handlebars.templates.post(elem);
-                    html = html + foo;
+                    html += Handlebars.templates.post(elem);
                 });
-                alert(html);
                 $('#posts').html(html);
             },
             error: function() {
