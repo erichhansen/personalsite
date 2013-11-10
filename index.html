@@ -18,7 +18,8 @@
     <link href="offcanvas.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]>
+    <script src="docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -44,16 +45,19 @@
                 <li class="active"><a href="index.html"><i class="fa fa-home fa-lg"></i></a></li>
                 <li><a href="archive.html">Archive</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="https://twitter.com/impossiblevent"><i class="fa fa-twitter-square fa-lg"></i></a></li>
-                <li><a href="http://www.linkedin.com/pub/erich-hansen/b/938/800"><i class="fa fa-linkedin-square fa-lg"></i> </a></li>
+                <li><a href="http://www.linkedin.com/pub/erich-hansen/b/938/800"><i
+                        class="fa fa-linkedin-square fa-lg"></i> </a></li>
                 <li><a href="https://github.com/erichhansen"><i class="fa fa-github fa-lg"></i></a></li>
             </ul>
-        </div><!-- /.nav-collapse -->
-    </div><!-- /.container -->
-</div><!-- /.navbar -->
+        </div>
+        <!-- /.nav-collapse -->
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.navbar -->
 
 <div class="container">
 
@@ -65,10 +69,13 @@
             </p>
             <div class="jumbotron">
                 <h1>Welcome!</h1>
-                <p>Welcome to my site, where I will discuss various topics in web development, explore new technologies, and have fun.</p>
+
+                <p>Welcome to my site, where I will discuss various topics in web development, explore new technologies,
+                    and have fun.</p>
             </div>
             <div id="posts"></div>
-        </div><!--/span-->
+        </div>
+        <!--/span-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
             <div class="list-group">
@@ -84,14 +91,16 @@
                     }
                 }(document, "script", "twitter-wjs");</script>
             </div>
-        </div><!--/span-->
-    </div><!--/row-->
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
     <hr>
     <footer>
         <p>&copy; Erich Hansen 2013</p>
     </footer>
-</div><!--/.container-->
-
+</div>
+<!--/.container-->
 
 
 <!-- Bootstrap core JavaScript
@@ -109,27 +118,27 @@
 <script type="text/javascript">
     var target = document.getElementById('posts');
     var spinner = new Spinner().spin(target);
-    $(document).ready(function() {
+    $(document).ready(function () {
         var url = 'https://public-api.wordpress.com/rest/v1/sites/erichhansen.wordpress.com/posts/?number=3&pretty=1';
         $.ajax({
             url: url,
-            type:'GET',
+            type: 'GET',
             dataType: 'jsonp',
-            crossDomain : true,
-            success: function(data) {
+            crossDomain: true,
+            success: function (data) {
                 var html = '';
-                $(data.posts).each(function(i, elem) {
+                $(data.posts).each(function (i, elem) {
                     html += Handlebars.templates.post(elem);
                 });
                 $('#posts').html(html);
             },
-            error: function() {
+            error: function () {
                 Modal.show('Error', 'An Error Has Occurred While Loading', 'fa-exclamation-triangle')
             }
         });
     });
 
-    Handlebars.registerHelper('formatDate', function(date) {
+    Handlebars.registerHelper('formatDate', function (date) {
         return date.substr(0, 10);
     });
 
