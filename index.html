@@ -75,8 +75,8 @@
         </div>
         <!--/span-->
 
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div class="list-group">
+        <div id="box" class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <div class="list-group">
                 <a class="twitter-timeline" href="https://twitter.com/impossiblevent"
                    data-widget-id="398867664581308417">Tweets by @impossiblevent</a>
                 <script>!function (d, s, id) {
@@ -139,6 +139,35 @@
     Handlebars.registerHelper('formatDate', function (date) {
         return date.substr(0, 10);
     });
+
+    window.onload = function () {
+
+        function getScrollTop() {
+            if (typeof window.pageYOffset !== 'undefined') {
+                // Most browsers
+                return window.pageYOffset;
+            }
+
+            var d = document.documentElement;
+            if (d.clientHeight) {
+                // IE in standards mode
+                return d.scrollTop;
+            }
+
+            // IE in quirks mode
+            return document.body.scrollTop;
+        }
+
+        window.onscroll = function () {
+            var box = document.getElementById('box'),
+                    scroll = getScrollTop();
+
+            if (scroll >= 3) {
+                box.style.top = (scroll + 2) + "px";
+            }
+        };
+
+    };
 
 </script>
 </body>
