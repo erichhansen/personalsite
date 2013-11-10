@@ -134,7 +134,6 @@
     function loadPost(id) {
         var url = 'https://public-api.wordpress.com/rest/v1/sites/erichhansen.wordpress.com/posts/';
         url = url + id.toString() + '/?pretty=1';
-        alert(url);
         $.ajax({
             url: url,
             type: 'GET',
