@@ -6,7 +6,7 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   var buffer = "", stack1, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
 
 
-  buffer += "<a href=\"#\"\n   onclick=\"$('.list-group-item').removeClass('active'); $(this).addClass('active'); alert('here'); loadPost(";
+  buffer += "<a href=\"#\"\n   onclick=\"$('.list-group-item').removeClass('active'); $(this).addClass('active'); loadPost(";
   if (stack1 = helpers.ID) { stack1 = stack1.call(depth0, {hash:{},data:data}); }
   else { stack1 = (depth0 && depth0.ID); stack1 = typeof stack1 === functionType ? stack1.call(depth0, {hash:{},data:data}) : stack1; }
   buffer += escapeExpression(stack1)
